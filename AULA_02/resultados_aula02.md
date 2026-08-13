@@ -171,4 +171,126 @@ Mas vale lembrar que ela não garante 100% de precisão sempre. Como não podemo
 
 
 
+Lab04: 
+
+import numpy as np
+
+# ============================================================
+# 1. Definição do Cenário do Problema Real
+# ============================================================
+np.random.seed(42)  # Para reproduzibilidade dos resultados
+
+# Nomes fictícios de tarefas de freelancing
+nomes_tarefas = [
+    "Ajuste de CSS em site",
+    "Criação de Logo",
+    "Modelagem de Banco de Dados",
+    "Automação em Python",
+    "Correção de Bug em App",
+    "Escrita de Artigo Técnico",
+    "Design de Landing Page",
+    "Integração de API de Pagamento",
+    "Otimização de SEO",
+    "Tradução de Documentação"
+]
+
+n_tarefas = len(nomes_tarefas)
+tempo_maximo_disponivel = 16  # limite de 16 horas no fim de semana
+
+# Gera tempo em horas (1 a 8 horas por tarefa)
+horas_tarefas = np.random.randint(1, 9, size=n_tarefas)
+
+# Gera valor pago em R$ (R$ 50 a R$ 400 por tarefa)
+valores_tarefas = np.random.randint(50, 401, size=n_tarefas)
+
+
+# ============================================================
+# 2. Funções de Modelagem e Avaliação
+# ============================================================
+def gerar_solucao_aleatoria(n):
+    """
+    Gera um vetor binário aleatório representando a escolha de tarefas.
+    Ex: [1, 0, 1, 1, ...]
+    """
+    return np.random.randint(0, 2, size=n)
+
+def calcular_funcao_objetivo(solucao, valores):
+    """
+    Calcula a receita total obtida pelas tarefas selecionadas.
+    """
+    return int(np.sum(solucao * valores))
+
+def verificar_restricoes(solucao, horas, limite_horas):
+    """
+    Verifica se a solução respeita a restrição de horas disponíveis.
+    Retorna True se for factível e o total de horas gastas.
+    """
+    horas_totais = int(np.sum(solucao * horas))
+    factivel = horas_totais <= limite_horas
+    return factivel, horas_totais
+
+
+# ============================================================
+# 3. Execução do Teste
+# ============================================================
+# Gerando uma solução aleatória
+solucao_testada = gerar_solucao_aleatoria(n_tarefas)
+receita_total = calcular_funcao_objetivo(solucao_testada, valores_tarefas)
+eh_factivel, horas_usadas = verificar_restricoes(solucao_testada, horas_tarefas, tempo_maximo_disponivel)
+
+# Exibição detalhada dos resultados
+print("=" * 60)
+print(" RELATÓRIO DE AVALIAÇÃO DE SOLUÇÃO ALEATÓRIA")
+print("=" * 60)
+print(f"Capacidade Máxima do Fim de Semana : {tempo_maximo_disponivel} horas\n")
+
+print("Tarefas Selecionadas na Solução:")
+print("-" * 60)
+for i in range(n_tarefas):
+    status = "ACEITA" if solucao_testada[i] == 1 else "RECUSADA"
+    print(f"[{status:8s}] {nomes_tarefas[i]:32s} | Tempo: {horas_tarefas[i]}h | Valor: R$ {valores_tarefas[i]}")
+
+print("-" * 60)
+print(f"Tempo Total Exigido : {horas_usadas}h / {tempo_maximo_disponivel}h")
+print(f"Valor Total Obtido  : R$ {receita_total}")
+print(f"A solução é Factual? : {'SIM (Respeita as restrições)' if eh_factivel else 'NÃO (Ultrapassa o tempo disponível)'}")
+print("=" * 60)
+
+
+Resultado: 
+============================================================
+ RELATÓRIO DE AVALIAÇÃO DE SOLUÇÃO ALEATÓRIA
+============================================================
+Capacidade Máxima do Fim de Semana : 16 horas
+
+Tarefas Selecionadas na Solução:
+------------------------------------------------------------
+[ACEITA  ] Ajuste de CSS em site            | Tempo: 7h | Valor: R$ 264
+[ACEITA  ] Criação de Logo                  | Tempo: 4h | Valor: R$ 380
+[ACEITA  ] Modelagem de Banco de Dados      | Tempo: 5h | Valor: R$ 137
+[ACEITA  ] Automação em Python              | Tempo: 7h | Valor: R$ 149
+[ACEITA  ] Correção de Bug em App           | Tempo: 3h | Valor: R$ 201
+[ACEITA  ] Escrita de Artigo Técnico        | Tempo: 8h | Valor: R$ 180
+[RECUSADA] Design de Landing Page           | Tempo: 5h | Valor: R$ 199
+[RECUSADA] Integração de API de Pagamento   | Tempo: 5h | Valor: R$ 358
+[ACEITA  ] Otimização de SEO                | Tempo: 7h | Valor: R$ 307
+[ACEITA  ] Tradução de Documentação         | Tempo: 2h | Valor: R$ 393
+------------------------------------------------------------
+Tempo Total Exigido : 43h / 16h
+Valor Total Obtido  : R$ 2011
+A solução é Factual? : NÃO (Ultrapassa o tempo disponível)
+============================================================
+
+Relatorio: 
+
+o código que fiz, a função gerar_solucao_aleatoria só joga a moeda para cada tarefa (0 ou 1) de forma totalmente cega. Ela não olha se o tempo estourou e nem se o valor ganho é bom.
+Na prática, ao rodar essa solução aleatória:
+Risco de ser inválida (infactível): Na maioria das vezes, a soma das horas vai passar do limite de 16h do fim de semana.
+Longe do ótimo: Mesmo quando ela não estoura o tempo, quase nunca pega a combinação que dá mais dinheiro.
+É exatamente por isso que esse problema é difícil. Não basta sair escolhendo qualquer tarefa: o desafio real é achar um método (como uma heurística gulosa ou busca) que consiga equilibrar o tempo gasto com o valor ganho, respeitando a restrição de 16h e maximizando o lucro.
+
+
+
+
+
 
