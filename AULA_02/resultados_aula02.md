@@ -53,3 +53,122 @@ OBSERVE: o numero de rotas cresce como (n-1)!  (fatorial)
  3 - Por conta do crescimento do tempo
 
 
+ Lab03: 
+
+
+ import numpy as np
+import itertools
+import time
+
+# ----------------------------------------------------------
+# 1. Funcao que resolve a mochila por forca-bruta (otima)
+# ----------------------------------------------------------
+def mochila_otima(pesos, valores, capacidade):
+    n = len(pesos)
+    melhor = 0
+    for comb in itertools.product([0, 1], repeat=n):
+        peso = sum(pesos[i] for i in range(n) if comb[i] == 1)
+        if peso <= capacidade:
+            valor = sum(valores[i] for i in range(n) if comb[i] == 1)
+            if valor > melhor:
+                melhor = valor
+    return melhor
+
+# ----------------------------------------------------------
+# 2. Heuristica Gulosa (ja pronta)
+# ----------------------------------------------------------
+def mochila_gulosa(pesos, valores, capacidade):
+    n = len(pesos)
+    densidade = [(valores[i] / pesos[i], i) for i in range(n)]
+    densidade.sort(reverse=True)
+
+    valor_total = 0
+    peso_atual = 0
+    for dens, i in densidade:
+        if peso_atual + pesos[i] <= capacidade:
+            peso_atual += pesos[i]
+            valor_total += valores[i]
+    return valor_total
+
+# ----------------------------------------------------------
+# 3. Funcao de calculo do Gap (IMPLEMENTADA)
+# ----------------------------------------------------------
+def calcular_gap(valor_heuristica, valor_otimo):
+    """
+    Retorna o gap percentual:
+    gap = ((valor_otimo - valor_heuristica) / valor_otimo) * 100
+    """
+    if valor_otimo == 0:
+        return 0.0
+    return ((valor_otimo - valor_heuristica) / valor_otimo) * 100.0
+
+# ----------------------------------------------------------
+# 4. Experimento: varias instancias aleatorias
+# ----------------------------------------------------------
+np.random.seed(42)  # semente de aleatoriedade
+n_itens = 12
+capacidade = 30
+n_instancias = 20
+
+gaps = []
+
+print('Rodando', n_instancias, 'instancias...')
+for k in range(n_instancias):
+    pesos = np.random.randint(1, 15, size=n_itens)
+    valores = np.random.randint(10, 50, size=n_itens)
+
+    otimo = mochila_otima(pesos, valores, capacidade)
+    heur = mochila_gulosa(pesos, valores, capacidade)
+
+    # Calculo e insercao do gap na lista
+    gap = calcular_gap(heur, otimo)
+    gaps.append(gap)
+
+    print(f'Instancia {k+1:2d} | Otimo: {otimo:4d} | Gulosa: {heur:4d} | Gap: {gap:5.1f}%')
+
+# ----------------------------------------------------------
+# 5. Estatisticas finais
+# ----------------------------------------------------------
+print('\n===== RESUMO =====')
+print(f'Gap medio     : {np.mean(gaps):.2f}%')
+print(f'Gap minimo    : {np.min(gaps):.2f}%')
+print(f'Gap maximo    : {np.max(gaps):.2f}%')
+print(f'Desvio padrao : {np.std(gaps):.2f}%')
+
+
+Resultado: 
+Rodando 20 instancias...
+Instancia  1 | Otimo:  199 | Gulosa:  199 | Gap:   0.0%
+Instancia  2 | Otimo:  170 | Gulosa:  170 | Gap:   0.0%
+Instancia  3 | Otimo:  155 | Gulosa:  155 | Gap:   0.0%
+Instancia  4 | Otimo:  147 | Gulosa:  147 | Gap:   0.0%
+Instancia  5 | Otimo:  261 | Gulosa:  261 | Gap:   0.0%
+Instancia  6 | Otimo:  214 | Gulosa:  214 | Gap:   0.0%
+Instancia  7 | Otimo:  191 | Gulosa:  187 | Gap:   2.1%
+Instancia  8 | Otimo:  183 | Gulosa:  183 | Gap:   0.0%
+Instancia  9 | Otimo:  215 | Gulosa:  206 | Gap:   4.2%
+Instancia 10 | Otimo:  174 | Gulosa:  174 | Gap:   0.0%
+Instancia 11 | Otimo:  262 | Gulosa:  262 | Gap:   0.0%
+Instancia 12 | Otimo:  206 | Gulosa:  206 | Gap:   0.0%
+Instancia 13 | Otimo:  231 | Gulosa:  231 | Gap:   0.0%
+Instancia 14 | Otimo:  309 | Gulosa:  309 | Gap:   0.0%
+Instancia 15 | Otimo:  294 | Gulosa:  294 | Gap:   0.0%
+Instancia 16 | Otimo:  247 | Gulosa:  247 | Gap:   0.0%
+Instancia 17 | Otimo:  136 | Gulosa:  134 | Gap:   1.5%
+Instancia 18 | Otimo:  212 | Gulosa:  212 | Gap:   0.0%
+Instancia 19 | Otimo:  243 | Gulosa:  243 | Gap:   0.0%
+Instancia 20 | Otimo:  193 | Gulosa:  193 | Gap:   0.0%
+
+===== RESUMO =====
+Gap medio     : 0.39%
+Gap minimo    : 0.00%
+Gap maximo    : 4.19%
+Desvio padrao : 1.03%
+
+
+3- Sim, na prática ela se mostrou muito boa. Nos testes que rodamos, ela teve um gap médio de apenas 0,39%, acertando o valor ótimo exato em 17 das 20 instâncias (85% das vezes). Como o código é super simples e roda quase instantaneamente, compensa muito usar a gulosa na maioria dos casos.
+Mas vale lembrar que ela não garante 100% de precisão sempre. Como não podemos "cortar" os itens ao meio na Mochila 0/1, pode acontecer de a gulosa colocar um item com densidade alta que ocupa muito espaço e acaba deixando um buraco na mochila que não dá para preencher com mais nada.
+
+
+
+
