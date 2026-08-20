@@ -195,6 +195,8 @@ Geração  40: Melhor f(x) = 8.9019 (x = 8.9020)
 
 MELHOR SOLUÇÃO ENCONTRADA: x = 8.9020, f(x) = 8.9019
 
+Consideração: Na aproximação do máximo global, o algoritmo encontrou a solução que x é aproximadamente 9.9020 com sua função sendo aproximadamente 8.9019, teoricamente máximo global  dessa função em um intervalo de 0 a 10 acontece aproximadamente 8.898 com sua função aproximadamente 8.899 o resultado do AG foi extremamente preciso. A resolução genética limitada, como Como usamos 8 bits, o intervalo de 0 a 10 foi dividido em apenas 255 partes iguais, o valor de x é exatamente o ponto discreto mais próximo do pico real que a codificação binária de 8 bits consegue representar. O desempenho e a convergência, na parte de convergência rápida O algoritmo encontrou seu melhor ponto logo nas primeiras gerações, na parte de estabilidade por elitismo a partir da geração 10 o valor da função de x permaneceu travado em 8.9019, com isso confirmamos que a estratégia de elitismo funcionou perfeitamente, impedindo que mutações destruíssem a melhor solução já encontrada. Já na parte de estagnação prematura, já que resultado tenha sido excelente, o travamento a partir da geração 10 mostra que a população perdeu diversidade genética cedo, dependendo apenas de mutações pontuais para tentar explorar novos pontos, e em possíveis pontos que podemos melhorar é obter ainda mais precisão decimal, seria necessário aumentar a resolução aumentando os bits do indivíduo de BITS = 8 para BITS = 16 ou 32.
+
 
 
 
