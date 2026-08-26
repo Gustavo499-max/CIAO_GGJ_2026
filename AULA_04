@@ -1,1 +1,437 @@
+Exercício 1: 
 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(2026)
+
+NUM_NOS = 8
+TAM_POP = 40
+GERACOES = 80
+
+matriz = np.random.uniform(10, 100, (NUM_NOS, NUM_NOS))
+np.fill_diagonal(matriz, 0)
+
+def calcular_custo(rota):
+    custo = sum(matriz[rota[i], rota[i+1]] for i in range(len(rota)-1))
+    return custo + matriz[rota[-1], rota[0]]
+
+def executar(usar_elitismo):
+    populacao = [np.random.permutation(NUM_NOS) for _ in range(TAM_POP)]
+    historico = []
+
+    for _ in range(GERACOES):
+        custos = [calcular_custo(ind) for ind in populacao]
+        melhor = np.argmin(custos)
+        historico.append(custos[melhor])
+
+        novos = []
+
+        if usar_elitismo:
+            novos.append(populacao[melhor].copy())
+
+        while len(novos) < TAM_POP:
+            i1, i2 = np.random.choice(TAM_POP, 2, replace=False)
+            pai = populacao[i1] if custos[i1] < custos[i2] else populacao[i2]
+
+            filho = pai.copy()
+
+            if np.random.rand() < 0.3:
+                a, b = np.random.choice(NUM_NOS, 2, replace=False)
+                filho[a], filho[b] = filho[b], filho[a]
+
+            novos.append(filho)
+
+        populacao = novos
+
+    custos = [calcular_custo(ind) for ind in populacao]
+    melhor = np.argmin(custos)
+
+    return populacao[melhor], custos[melhor], historico
+
+
+# Com elitismo
+np.random.seed(2026)
+rota_com, custo_com, hist_com = executar(True)
+
+# Sem elitismo
+np.random.seed(2026)
+rota_sem, custo_sem, hist_sem = executar(False)
+
+print("COM ELITISMO")
+print("Rota:", rota_com)
+print(f"Custo: {custo_com:.2f}")
+
+print("\nSEM ELITISMO")
+print("Rota:", rota_sem)
+print(f"Custo: {custo_sem:.2f}")
+
+plt.plot(hist_com, label="Com elitismo")
+plt.plot(hist_sem, label="Sem elitismo")
+
+plt.xlabel("Geração")
+plt.ylabel("Melhor custo")
+plt.title("Comparação com e sem elitismo")
+plt.legend()
+plt.grid()
+
+plt.show()
+
+Resultado: 
+
+COM ELITISMO
+Rota: [6 4 7 2 5 3 0 1]
+Custo: 250.37
+
+SEM ELITISMO
+Rota: [5 7 1 6 4 0 3 2]
+Custo: 272.22
+
+Resumo:
+Com o elitismo ativado, o melhor membro de cada geração é mantido
+evitando que uma solução de excelência se perca devido a cruzamento ou mutação. 
+Sem o elitismo, a melhor solução pode se apagar nas próximas gerações. No experimento realizado
+o algoritmo que utilizou elitismo obteve um custo inferior ao da execução sem elitismo.
+
+
+Exercício 2: 
+
+import numpy as np
+
+# ==========================================
+# EXERCÍCIO 2 - PENALIDADE POR SLA
+# ==========================================
+
+# Semente solicitada no exercício
+np.random.seed(15)
+
+# Matriz de latência com 6 nós
+matriz_latencia = np.random.uniform(5, 80, (6, 6))
+
+# Limite máximo permitido pelo SLA
+LIMITE_SLA = 50
+
+# Penalidade aplicada quando o SLA é ultrapassado
+PENALIDADE = 1000
+
+
+# Função para calcular o custo da rota
+def calcular_custo_com_sla(rota, matriz):
+
+    custo_total = 0
+    penalidade_total = 0
+
+    for i in range(len(rota) - 1):
+
+        origem = rota[i]
+        destino = rota[i + 1]
+
+        latencia = matriz[origem, destino]
+
+        # Soma a latência do enlace
+        custo_total += latencia
+
+        print(
+            f"Enlace {origem} -> {destino}: "
+            f"{latencia:.2f} ms"
+        )
+
+        # Verifica se o SLA foi ultrapassado
+        if latencia > LIMITE_SLA:
+
+            penalidade_total += PENALIDADE
+
+            print(
+                f"  SLA ultrapassado! "
+                f"Penalidade de +{PENALIDADE} ms"
+            )
+
+    # Soma custo normal + penalidades
+    return custo_total + penalidade_total
+
+
+# Rota utilizada para teste
+rota_teste = np.array([0, 1, 2, 3, 4, 5])
+
+
+# Executa a função
+custo_final = calcular_custo_com_sla(
+    rota_teste,
+    matriz_latencia
+)
+
+
+# Exibe o resultado
+print("\n==============================")
+print("RESULTADO DO EXERCÍCIO 2")
+print("==============================")
+
+print(f"Rota: {rota_teste}")
+
+print(
+    f"Custo Total com penalidades: "
+    f"{custo_final:.2f} ms"
+)
+
+Resultado:
+
+Enlace 0 -> 1: 18.42 ms
+Enlace 1 -> 2: 13.38 ms
+Enlace 2 -> 3: 20.79 ms
+Enlace 3 -> 4: 62.04 ms
+  SLA ultrapassado! Penalidade de +1000 ms
+Enlace 4 -> 5: 45.38 ms
+
+==============================
+RESULTADO
+==============================
+Rota: [0 1 2 3 4 5]
+Custo Total com penalidades: 1160.00 ms
+
+
+Resumo:
+
+Neste exercício, foi criado um sistema de penalização para rotas que não cumprem o SLA de latência. 
+O algoritmo analisa cada enlace da rota e agrega suas latências respectivas. 
+Se um enlace tem uma latência que ultrapassa o limite definido de 50 ms, uma penalidade extra de 1000 ms é adicionada ao custo geral.
+Assim, rotas que possuem enlaces com alta latência acabam tendo um custo mais elevado, 
+o que facilita a identificação e a desvantagem de caminhos que não satisfazem os padrões de qualidade do serviço. 
+No final, o programa revela o custo total da rota já incluindo todas as penalizações por não conformidades com o SLA.
+
+Exercicio 3: 
+import numpy as np
+
+# =============================================
+# EXERCÍCIO 3 - BALANCEAMENTO DE SERVIDORES
+# =============================================
+
+np.random.seed(2026)
+
+TAREFAS = np.array([
+    12, 35, 40, 8, 15,
+    22, 19, 45, 60, 31,
+    14, 28, 50, 18, 25,
+    33, 42, 10, 5, 29
+])
+
+NUM_SERVIDORES = 4
+TAM_POP = 100
+GERACOES = 200
+
+
+# Calcula a carga de cada servidor
+def calcular_cargas(individuo):
+
+    cargas = np.zeros(NUM_SERVIDORES)
+
+    for i, servidor in enumerate(individuo):
+        cargas[servidor] += TAREFAS[i]
+
+    return cargas
+
+
+# Calcula o Makespan
+def calcular_makespan(individuo):
+
+    cargas = calcular_cargas(individuo)
+
+    return max(cargas)
+
+
+# Seleção por torneio
+def selecionar(populacao):
+
+    indices = np.random.choice(
+        len(populacao),
+        3,
+        replace=False
+    )
+
+    melhor = min(
+        indices,
+        key=lambda i: calcular_makespan(populacao[i])
+    )
+
+    return populacao[melhor].copy()
+
+
+# Cruzamento
+def cruzar(pai1, pai2):
+
+    ponto = np.random.randint(1, len(TAREFAS))
+
+    filho = np.concatenate([
+        pai1[:ponto],
+        pai2[ponto:]
+    ])
+
+    return filho
+
+
+# Mutação
+def mutar(individuo):
+
+    filho = individuo.copy()
+
+    if np.random.rand() < 0.2:
+
+        posicao = np.random.randint(
+            0,
+            len(TAREFAS)
+        )
+
+        filho[posicao] = np.random.randint(
+            0,
+            NUM_SERVIDORES
+        )
+
+    return filho
+
+
+# Criação da população inicial
+populacao = np.random.randint(
+    0,
+    NUM_SERVIDORES,
+    size=(TAM_POP, len(TAREFAS))
+)
+
+
+# =============================================
+# ALGORITMO GENÉTICO
+# =============================================
+
+for geracao in range(GERACOES):
+
+    nova_populacao = []
+
+    # Descobre o melhor indivíduo
+    melhor = min(
+        populacao,
+        key=calcular_makespan
+    )
+
+    # Elitismo
+    nova_populacao.append(melhor.copy())
+
+    # Gera os novos indivíduos
+    while len(nova_populacao) < TAM_POP:
+
+        pai1 = selecionar(populacao)
+        pai2 = selecionar(populacao)
+
+        filho = cruzar(pai1, pai2)
+
+        filho = mutar(filho)
+
+        nova_populacao.append(filho)
+
+    populacao = np.array(nova_populacao)
+
+
+# =============================================
+# RESULTADO FINAL
+# =============================================
+
+melhor = min(
+    populacao,
+    key=calcular_makespan
+)
+
+cargas = calcular_cargas(melhor)
+
+makespan = calcular_makespan(melhor)
+
+
+print("=" * 50)
+print("EXERCÍCIO 3 - BALANCEAMENTO DE SERVIDORES")
+print("=" * 50)
+
+print("\nMelhor indivíduo:")
+print(melhor)
+
+print("\nCarga de cada servidor:")
+
+for servidor in range(NUM_SERVIDORES):
+
+    print(
+        f"Servidor {servidor}: "
+        f"{cargas[servidor]:.0f} segundos"
+    )
+
+print(
+    f"\nMakespan final: "
+    f"{makespan:.0f} segundos"
+)
+
+
+# Mostra as tarefas de cada servidor
+print("\nDistribuição das tarefas:")
+
+for servidor in range(NUM_SERVIDORES):
+
+    print(f"\nServidor {servidor}:")
+
+    for i in range(len(TAREFAS)):
+
+        if melhor[i] == servidor:
+
+            print(
+                f"Tarefa {i} = "
+                f"{TAREFAS[i]} segundos"
+            )
+
+
+Resultado: 
+
+
+Melhor indivíduo:
+[0 3 2 2 0 0 0 3 1 3 3 1 0 0 2 2 1 3 1 2]
+
+Carga de cada servidor:
+Servidor 0: 136 segundos
+Servidor 1: 135 segundos
+Servidor 2: 135 segundos
+Servidor 3: 135 segundos
+
+Makespan final: 136 segundos
+
+Distribuição das tarefas:
+
+Servidor 0:
+Tarefa 0 = 12 segundos
+Tarefa 4 = 15 segundos
+Tarefa 5 = 22 segundos
+Tarefa 6 = 19 segundos
+Tarefa 12 = 50 segundos
+Tarefa 13 = 18 segundos
+
+Servidor 1:
+Tarefa 8 = 60 segundos
+Tarefa 11 = 28 segundos
+Tarefa 16 = 42 segundos
+Tarefa 18 = 5 segundos
+
+Servidor 2:
+Tarefa 2 = 40 segundos
+Tarefa 3 = 8 segundos
+Tarefa 14 = 25 segundos
+Tarefa 15 = 33 segundos
+Tarefa 19 = 29 segundos
+
+Servidor 3:
+Tarefa 1 = 35 segundos
+Tarefa 7 = 45 segundos
+Tarefa 9 = 31 segundos
+Tarefa 10 = 14 segundos
+Tarefa 17 = 10 segundos
+
+
+Resumo: 
+
+Neste exercício, foi implementado um Algoritmo Genético para a distribuição de carga, alocando 20 atividades em 4 servidores. 
+Cada candidato representa uma implementação potencial das atividades, determinando qual servidor será encarregado de cada uma.
+A meta principal é reduzir o Makespan, que é definido como a carga máxima acumulada entre os servidores. 
+Para otimizar as soluções ao longo das gerações, foram aplicados os métodos de seleção, cruzamento, mutação e elitismo.
+Ao concluir a execução, o algoritmo apresenta a distribuição ideal encontrada, a carga total para cada servidor e o Makespan final.
+Assim, procura-se dividir as atividades da forma mais equilibrada possível, evitando que um único servidor fique sobrecarregado.
