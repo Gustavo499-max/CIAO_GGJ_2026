@@ -26,23 +26,12 @@ Cálculo da melhor rota:
 0 -> 1 = 2.0
 1 -> 2 = 1.0
 
+Resposta: 
+1- O ACO utiliza várias formigas porque cada uma pode explorar caminhos diferentes, dessa forma, o algoritmo consegue analisar várias possibilidades ao mesmo tempo e aumenta a chance de encontrar uma rota melhor, se apenas uma formiga fosse utilizada, ela poderia escolher um caminho ruim logo no início e não explorar outras alternativas, com várias formigas, algumas podem encontrar rotas diferentes e comparar indiretamente suas soluções por meio do feromônio, portanto, a exploração de diferentes caminhos ajuda o algoritmo a evitar ficar preso em uma solução ruim e aumenta a possibilidade de encontrar uma rota de menor custo.
 
-1- O ACO utiliza várias formigas porque cada uma pode explorar caminhos diferentes. Dessa forma, o algoritmo consegue analisar várias possibilidades ao mesmo tempo e aumenta a chance de encontrar uma rota melhor.
+2- Uma rota de menor custo recebe mais feromônio porque ela representa uma solução melhor para o problema, portanto, quanto menor o custo, maior será a quantidade de feromônio depositada, esse aumento do feromônio faz com que as próximas formigas tenham uma probabilidade maior de escolher as mesmas conexões, assim, caminhos que apresentaram bons resultados são reforçados e passam a influenciar positivamente as próximas decisões da colônia.
 
-Se apenas uma formiga fosse utilizada, ela poderia escolher um caminho ruim logo no início e não explorar outras alternativas. Com várias formigas, algumas podem encontrar rotas diferentes e comparar indiretamente suas soluções por meio do feromônio.
-
-Portanto, a exploração de diferentes caminhos ajuda o algoritmo a evitar ficar preso em uma solução ruim e aumenta a possibilidade de encontrar uma rota de menor custo.
-
-2- Uma rota de menor custo recebe mais feromônio porque ela representa uma solução melhor para o problema. 
-Portanto, quanto menor o custo, maior será a quantidade de feromônio depositada.
-
-Esse aumento do feromônio faz com que as próximas formigas tenham uma probabilidade maior de escolher as mesmas conexões. Assim, caminhos que apresentaram bons resultados são reforçados e passam a influenciar positivamente as próximas decisões da colônia.
-
-3- Sem a evaporação, o feromônio acumulado nos primeiros caminhos encontrados permaneceria indefinidamente.
-
-Isso poderia fazer com que as formigas começassem a seguir sempre os mesmos caminhos, mesmo que eles não fossem realmente os melhores. O algoritmo perderia capacidade de explorar novas alternativas e poderia ficar preso em uma solução de baixa qualidade.
-
-A evaporação diminui gradualmente a influência das informações antigas e permite que novos caminhos também sejam testados e reforçados. Dessa forma, existe um equilíbrio entre explorar novos caminhos e aproveitar os caminhos que já apresentaram bons resultados.
+3- Sem a evaporação, o feromônio acumulado nos primeiros caminhos encontrados permaneceria indefinidamente, isso poderia fazer com que as formigas começassem a seguir sempre os mesmos caminhos, mesmo que eles não fossem realmente os melhores, o algoritmo perderia capacidade de explorar novas alternativas e poderia ficar preso em uma solução de baixa qualidade, a evaporação diminui gradualmente a influência das informações antigas e permite que novos caminhos também sejam testados e reforçados. Dessa forma, existe um equilíbrio entre explorar novos caminhos e aproveitar os caminhos que já apresentaram bons resultados.
 
 
 Lab02_aula06
@@ -161,13 +150,9 @@ Melhor rota: [0, 1, 2, 3, 4, 5]
 Melhor custo: 8.0
 
 
-Os experimentos mostraram que os parâmetros do ACO influenciam diretamente o equilíbrio entre exploração e aproveitamento das soluções já encontradas. O parâmetro ALPHA controla a influência do feromônio, portanto valores maiores fazem com que as formigas sigam com maior intensidade os caminhos que foram bem avaliados anteriormente. O parâmetro BETA controla a influência do custo, fazendo com que valores altos aumentem a preferência por conexões de menor custo.
+Os experimentos mostraram que os parâmetros do ACO influenciam diretamente o equilíbrio entre exploração e aproveitamento das soluções já encontradas, o parâmetro ALPHA controla a influência do feromônio, portanto valores maiores fazem com que as formigas sigam com maior intensidade os caminhos que foram bem avaliados anteriormente, o parâmetro BETA controla a influência do custo, fazendo com que valores altos aumentem a preferência por conexões de menor custo, a taxa de evaporação determina por quanto tempo as informações acumuladas permanecem no algoritmo. Uma evaporação baixa mantém o conhecimento das rotas anteriores por mais tempo, enquanto uma evaporação alta faz com que o algoritmo esqueça rapidamente essas informações. Por fim, aumentar o número de formigas permite explorar uma quantidade maior de caminhos em cada iteração, aumentando a possibilidade de encontrar boas soluções rapidamente, porém também aumentando o custo computacional, mesmo alterando os parâmetros, neste problema simples o algoritmo tende a encontrar a rota 0 → 1 → 2 → 3 → 4 → 5, com custo total 8, a principal diferença entre os experimentos aparece na velocidade de convergência e na distribuição final do feromônio.
 
-A taxa de evaporação determina por quanto tempo as informações acumuladas permanecem no algoritmo. Uma evaporação baixa mantém o conhecimento das rotas anteriores por mais tempo, enquanto uma evaporação alta faz com que o algoritmo esqueça rapidamente essas informações. Por fim, aumentar o número de formigas permite explorar uma quantidade maior de caminhos em cada iteração, aumentando a possibilidade de encontrar boas soluções rapidamente, porém também aumentando o custo computacional.
-
-Mesmo alterando os parâmetros, neste problema simples o algoritmo tende a encontrar a rota 0 → 1 → 2 → 3 → 4 → 5, com custo total 8. A principal diferença entre os experimentos aparece na velocidade de convergência e na distribuição final do feromônio.
-
-Resposta da pergunta principal: quando o algoritmo esquece rapidamente as experiências anteriores, o comportamento das formigas passa a depender muito mais das experiências recentes. Isso pode aumentar a exploração, mas também pode dificultar a consolidação de uma boa rota, porque o feromônio das soluções anteriores desaparece rapidamente.
+Resposta da pergunta principal: Quando o algoritmo esquece rapidamente as experiências anteriores, o comportamento das formigas passa a depender muito mais das experiências recentes, isso pode aumentar a exploração, mas também pode dificultar a consolidação de uma boa rota, porque o feromônio das soluções anteriores desaparece rapidamente.
 
 
 Lab03_aula06
@@ -210,35 +195,21 @@ Custo 2 → 1 / 2 = 0,5
 
 Custo 5 → 1 / 5 = 0,2
 
-Assim, as conexões de menor custo possuem uma probabilidade maior de serem escolhidas pelas formigas.
-
-Se o algoritmo utilizasse diretamente o custo, as rotas mais caras poderiam acabar se tornando mais atrativas, o que seria o contrário do objetivo da otimização.
+Assim, as conexões de menor custo possuem uma probabilidade maior de serem escolhidas pelas formigas, se o algoritmo utilizasse diretamente o custo, as rotas mais caras poderiam acabar se tornando mais atrativas, o que seria o contrário do objetivo da otimização.
 
 
-2- Quando uma conexão recebe mais feromônio, sua atratividade aumenta.
-
-Isso acontece porque o feromônio faz parte da fórmula:
+2- Quando uma conexão recebe mais feromônio, sua atratividade aumenta, isso acontece porque o feromônio faz parte da fórmula:
 
 fer ** ALPHA
 
-Portanto, quanto maior a quantidade de feromônio, maior tende a ser o valor da atratividade.
-
-Como consequência, as próximas formigas terão maior probabilidade de escolher aquela conexão.
-
-Dessa forma, o ACO cria um processo de aprendizado coletivo: caminhos utilizados em boas soluções recebem mais feromônio e passam a ser escolhidos com maior frequência.
+Portanto, quanto maior a quantidade de feromônio, maior tende a ser o valor da atratividade, como consequência, as próximas formigas terão maior probabilidade de escolher aquela conexão, dessa forma, o ACO cria um processo de aprendizado coletivo: caminhos utilizados em boas soluções recebem mais feromônio e passam a ser escolhidos com maior frequência.
 
 
-3- A função precisa impedir que a formiga retorne a um nó já visitado para evitar ciclos.
-
-Por exemplo, sem essa restrição uma formiga poderia fazer:
+3- A função precisa impedir que a formiga retorne a um nó já visitado para evitar ciclos, por exemplo, sem essa restrição uma formiga poderia fazer:
 
 0 → 1 → 2 → 1 → 2 → 1 → 2...
 
-Ela poderia ficar repetindo os mesmos nós e nunca chegar ao destino.
-
-Além disso, retornar para nós já visitados aumentaria desnecessariamente o custo da rota.
-
-Por isso o código utiliza:
+Ela poderia ficar repetindo os mesmos nós e nunca chegar ao destino, além disso, retornar para nós já visitados aumentaria desnecessariamente o custo da rota, por isso o código utiliza:
 
 candidatos = [
     no for no in vizinhos
@@ -777,35 +748,17 @@ Matriz final de feromônio:
 
  Resposta 
 
- 1- O feromônio funciona como uma espécie de memória coletiva da colônia.
-
-Quando uma formiga encontra uma rota, ela deposita feromônio nas conexões que utilizou. Como o depósito é calculado por:
+ 1- O feromônio funciona como uma espécie de memória coletiva da colônia, quando uma formiga encontra uma rota, ela deposita feromônio nas conexões que utilizou, como o depósito é calculado por:
 
 deposito = Q / custo
 
 uma rota de menor custo recebe uma quantidade maior de feromônio.
 
-Nas próximas iterações, as conexões que possuem mais feromônio tornam-se mais atrativas e têm uma chance maior de serem escolhidas pelas novas formigas.
+Nas próximas iterações, as conexões que possuem mais feromônio tornam-se mais atrativas e têm uma chance maior de serem escolhidas pelas novas formigas, dessa maneira, as boas experiências das formigas anteriores influenciam as decisões das próximas formigas, com o passar das iterações, os melhores caminhos tendem a acumular mais feromônio.
 
-Dessa maneira, as boas experiências das formigas anteriores influenciam as decisões das próximas formigas. Com o passar das iterações, os melhores caminhos tendem a acumular mais feromônio.
+2- Explorar significa testar caminhos diferentes, inclusive caminhos que ainda possuem pouco feromônio. Isso é importante porque permite descobrir novas rotas que podem ser melhores do que as encontradas anteriormente, aproveitar significa utilizar o conhecimento acumulado pela colônia, dando preferência aos caminhos que já possuem bastante feromônio e que anteriormente apresentaram bons resultados, o ACO precisa encontrar um equilíbrio entre os dois comportamentos, se o algoritmo explorar demais, pode demorar para aproveitar uma boa solução já encontrada, se aproveitar demais, pode ficar preso em uma rota encontrada no início e deixar de descobrir uma solução ainda melhor.
 
-2- Explorar significa testar caminhos diferentes, inclusive caminhos que ainda possuem pouco feromônio. Isso é importante porque permite descobrir novas rotas que podem ser melhores do que as encontradas anteriormente.
-
-Aproveitar significa utilizar o conhecimento acumulado pela colônia, dando preferência aos caminhos que já possuem bastante feromônio e que anteriormente apresentaram bons resultados.
-
-O ACO precisa encontrar um equilíbrio entre os dois comportamentos.
-
-Se o algoritmo explorar demais, pode demorar para aproveitar uma boa solução já encontrada.
-
-Se aproveitar demais, pode ficar preso em uma rota encontrada no início e deixar de descobrir uma solução ainda melhor.
-
-3- Eu investigaria primeiro o número de formigas e o número de iterações, porque eles influenciam diretamente a quantidade de caminhos analisados e o custo computacional do algoritmo.
-
-Em uma rede pequena, utilizar 20 formigas por 50 iterações significa realizar uma quantidade relativamente pequena de buscas. Porém, em uma rede com centenas ou milhares de nós, aumentar demais esses valores pode deixar o processamento muito mais lento.
-
-Também seria importante analisar a função que seleciona os próximos nós, tentando evitar cálculos desnecessários e restringir candidatos pouco interessantes.
-
-Portanto, eu buscaria um equilíbrio entre quantidade de formigas, número de iterações e qualidade da exploração, para encontrar boas soluções sem tornar o algoritmo excessivamente lento.
+3- Eu investigaria primeiro o número de formigas e o número de iterações, porque eles influenciam diretamente a quantidade de caminhos analisados e o custo computacional do algoritmo, em uma rede pequena, utilizar 20 formigas por 50 iterações significa realizar uma quantidade relativamente pequena de buscas. Porém, em uma rede com centenas ou milhares de nós, aumentar demais esses valores pode deixar o processamento muito mais lento, também seria importante analisar a função que seleciona os próximos nós, tentando evitar cálculos desnecessários e restringir candidatos pouco interessantes, portanto, eu buscaria um equilíbrio entre quantidade de formigas, número de iterações e qualidade da exploração, para encontrar boas soluções sem tornar o algoritmo excessivamente lento.
 
 
 
