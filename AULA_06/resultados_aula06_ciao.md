@@ -19,9 +19,6 @@ Formiga 3: [0, 1, 2, 3, 4, 5]
 Formiga 4: [0, 1, 2, 3, 4, 5]
 Formiga 5: [0, 2, 1, 3, 4, 5]
 
-==============================
-       RESULTADO FINAL
-==============================
 Melhor rota encontrada: [0, 1, 2, 3, 4, 5]
 Melhor custo: 8.0
 
@@ -51,7 +48,127 @@ A evaporação diminui gradualmente a influência das informações antigas e pe
 Lab02_aula06
 Resultados:
 
+EXPERIMENTO PADRÃO
 
-2 -> 3 = 2.0
-3 -> 4 = 1.0
-4 -> 5 = 2.0
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 2.0
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+EXPERIMENTO 1 — ALPHA = 0.1
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 0.1
+BETA: 2.0
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+EXPERIMENTO 1 — ALPHA = 5.0
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 5.0
+BETA: 2.0
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+EXPERIMENTO 2 — BETA = 0.5
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 0.5
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+EXPERIMENTO 2 — BETA = 5.0
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 5.0
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+
+
+EXPERIMENTO 3 — EVAPORAÇÃO = 0.1
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 2.0
+Taxa de evaporação: 0.1
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+EXPERIMENTO 3 — EVAPORAÇÃO = 0.9
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 20
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 2.0
+Taxa de evaporação: 0.9
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+
+
+EXPERIMENTO 4 — 5 FORMIGAS
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 5
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 2.0
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+EXPERIMENTO 4 — 50 FORMIGAS
+
+==============================================
+========== RESULTADO DO EXPERIMENTO ==========
+Número de formigas: 50
+Número de iterações: 50
+ALPHA: 1.0
+BETA: 2.0
+Taxa de evaporação: 0.5
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+
+Os experimentos mostraram que os parâmetros do ACO influenciam diretamente o equilíbrio entre exploração e aproveitamento das soluções já encontradas. O parâmetro ALPHA controla a influência do feromônio, portanto valores maiores fazem com que as formigas sigam com maior intensidade os caminhos que foram bem avaliados anteriormente. O parâmetro BETA controla a influência do custo, fazendo com que valores altos aumentem a preferência por conexões de menor custo.
+
+A taxa de evaporação determina por quanto tempo as informações acumuladas permanecem no algoritmo. Uma evaporação baixa mantém o conhecimento das rotas anteriores por mais tempo, enquanto uma evaporação alta faz com que o algoritmo esqueça rapidamente essas informações. Por fim, aumentar o número de formigas permite explorar uma quantidade maior de caminhos em cada iteração, aumentando a possibilidade de encontrar boas soluções rapidamente, porém também aumentando o custo computacional.
+
+Mesmo alterando os parâmetros, neste problema simples o algoritmo tende a encontrar a rota 0 → 1 → 2 → 3 → 4 → 5, com custo total 8. A principal diferença entre os experimentos aparece na velocidade de convergência e na distribuição final do feromônio.
+
+Resposta da pergunta principal: quando o algoritmo esquece rapidamente as experiências anteriores, o comportamento das formigas passa a depender muito mais das experiências recentes. Isso pode aumentar a exploração, mas também pode dificultar a consolidação de uma boa rota, porque o feromônio das soluções anteriores desaparece rapidamente.
+
+
+
+
