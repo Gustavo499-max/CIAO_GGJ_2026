@@ -170,5 +170,86 @@ Mesmo alterando os parâmetros, neste problema simples o algoritmo tende a encon
 Resposta da pergunta principal: quando o algoritmo esquece rapidamente as experiências anteriores, o comportamento das formigas passa a depender muito mais das experiências recentes. Isso pode aumentar a exploração, mas também pode dificultar a consolidação de uma boa rota, porque o feromônio das soluções anteriores desaparece rapidamente.
 
 
+Lab03_aula06
+Resultado:
+
+Melhor rota: [0, 1, 2, 3, 4, 5]
+Melhor custo: 8.0
+
+Cálculo da melhor rota:
+0 -> 1 = 2.0
+1 -> 2 = 1.0
+2 -> 3 = 2.0
+3 -> 4 = 1.0
+4 -> 5 = 2.0
+
+Matriz final de feromônio:
+[[  0. 500.   0.   0.   0.   0.]
+ [  0.   0. 500.   0.   0.   0.]
+ [  0.   0.   0. 500.   0.   0.]
+ [  0.   0.   0.   0. 500.   0.]
+ [  0.   0.   0.   0.   0. 500.]
+ [  0.   0.   0.   0.   0.   0.]]
+
+
+ Resposta: 
+
+ 1- A fórmula utiliza 1 / custo porque o objetivo do problema é encontrar caminhos de menor custo.
+
+Ao utilizar:
+
+1 / custo
+
+um caminho barato produz um valor maior de atratividade, enquanto um caminho caro produz um valor menor.
+
+Por exemplo:
+
+Custo 1 → 1 / 1 = 1
+
+Custo 2 → 1 / 2 = 0,5
+
+Custo 5 → 1 / 5 = 0,2
+
+Assim, as conexões de menor custo possuem uma probabilidade maior de serem escolhidas pelas formigas.
+
+Se o algoritmo utilizasse diretamente o custo, as rotas mais caras poderiam acabar se tornando mais atrativas, o que seria o contrário do objetivo da otimização.
+
+
+2- Quando uma conexão recebe mais feromônio, sua atratividade aumenta.
+
+Isso acontece porque o feromônio faz parte da fórmula:
+
+fer ** ALPHA
+
+Portanto, quanto maior a quantidade de feromônio, maior tende a ser o valor da atratividade.
+
+Como consequência, as próximas formigas terão maior probabilidade de escolher aquela conexão.
+
+Dessa forma, o ACO cria um processo de aprendizado coletivo: caminhos utilizados em boas soluções recebem mais feromônio e passam a ser escolhidos com maior frequência.
+
+
+3- A função precisa impedir que a formiga retorne a um nó já visitado para evitar ciclos.
+
+Por exemplo, sem essa restrição uma formiga poderia fazer:
+
+0 → 1 → 2 → 1 → 2 → 1 → 2...
+
+Ela poderia ficar repetindo os mesmos nós e nunca chegar ao destino.
+
+Além disso, retornar para nós já visitados aumentaria desnecessariamente o custo da rota.
+
+Por isso o código utiliza:
+
+candidatos = [
+    no for no in vizinhos
+    if no not in rota
+]
+
+Assim, cada nó pode ser visitado apenas uma vez durante a construção daquela rota.
+
+
+
+
+
 
 
