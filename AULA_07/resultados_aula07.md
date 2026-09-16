@@ -122,6 +122,40 @@ Um valor menor de w reduz o movimento das partículas, favorecendo uma busca mai
 Portanto, a inércia é importante para equilibrar exploração e refinamento. Um bom equilíbrio ajuda o PSO a explorar o espaço de busca sem abandonar rapidamente regiões promissoras.
 
 
+LAB 04: 
+
+[LAB 04] Matriz de Feromônio Atualizada:
+ [[0.75       0.91666667 0.91666667 0.75      ]
+ [0.75       0.75       0.75       1.08333333]
+ [0.75       0.91666667 0.75       0.75      ]
+ [0.75       0.75       0.75       0.75      ]]
+
+Questões Técnicas — LAB 04
+1 - Por que a evaporação do feromônio é necessária no algoritmo ACO?
+
+A evaporação é necessária para evitar que os caminhos utilizados anteriormente mantenham uma influência muito grande durante toda a execução.
+
+Ela ocorre pela fórmula:
+
+feromônio = (1 - rho) × feromônio
+
+No LAB, como rho = 0.25, a cada atualização permanece 75% do feromônio anterior.
+
+Isso permite que o algoritmo gradualmente reduza a importância de caminhos antigos e continue explorando outras alternativas. Portanto, a evaporação ajuda a manter o equilíbrio entre Exploration, procurando novas rotas, e Exploitation, utilizando as melhores rotas já encontradas.
+
+2 - O que ocorreria em grafos complexos sem ela?Qual a relação matemática entre a latência de um enlace e sua atratividade inicial (eta) para as formigas?
+
+Sem evaporação (rho = 0), o feromônio depositado nunca seria reduzido e continuaria se acumulando.
+
+Em grafos complexos, alguns caminhos poderiam receber muito feromônio nas primeiras iterações simplesmente por terem sido escolhidos inicialmente. As formigas passariam a escolher esses caminhos com frequência cada vez maior, reduzindo a exploração de outras rotas.
+
+Isso pode provocar convergência prematura ou estagnação, fazendo com que o algoritmo permaneça em uma solução subótima e tenha dificuldade para descobrir caminhos melhores.
+
+
+LAB 05:
+
+
+
 
 
 
