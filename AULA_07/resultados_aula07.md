@@ -3,10 +3,10 @@ resultados:
 LAB 01:
 
 1 - Como o uso da busca local 2-opt afeta o equilíbrio entre Exploration e Exploitation na busca de caminhos?
-A busca local 2-opt aumenta a Exploitation do ACO, pois melhora localmente as rotas construídas pelas formigas através da inversão de trechos. Dessa forma, o ACO realiza a busca global e probabilística, enquanto o 2-opt refina as soluções encontradas. Isso pode acelerar a convergência, mas o uso excessivo da busca local pode diminuir a diversidade das soluções.
+A busca local 2-opt aumenta a Exploitation do ACO, pois melhora localmente as rotas construídas pelas formigas através da inversão de trechos, dessa forma, o ACO realiza a busca global e probabilística, enquanto o 2-opt refina as soluções encontradas, isso pode acelerar a convergência, mas o uso excessivo da busca local pode diminuir a diversidade das soluções.
 
 2 - O que aconteceria com a convergência do algoritmo se a taxa de evaporação (rho) fosse definida em 0.0 (sem evaporação)?
-Com rho = 0.0, não ocorre evaporação dos feromônios. Assim, os feromônios acumulados permanecem durante todas as iterações, fazendo com que caminhos inicialmente favorecidos tenham influência cada vez maior. Isso reduz a exploração de novas rotas e pode causar convergência prematura ou estagnação em uma solução subótima.
+Com rho = 0.0, não ocorre evaporação dos feromônios, assim, os feromônios acumulados permanecem durante todas as iterações, fazendo com que caminhos inicialmente favorecidos tenham influência cada vez maior, isso reduz a exploração de novas rotas e pode causar convergência prematura ou estagnação em uma solução subótima.
 
 LAB02:
 
@@ -87,39 +87,15 @@ Coordenada Y: -0.013089
 Questões Técnicas — LAB 03
 1 - O que acontece com o comportamento das partículas se zerarmos a componente cognitiva (c_1 = 0)?
 
-A componente cognitiva representa a memória individual da partícula, fazendo com que ela seja atraída para a melhor posição que ela própria já encontrou (pbest).
-
-Se c1 = 0, essa influência desaparece da equação:
+A componente cognitiva representa a memória individual da partícula, fazendo com que ela seja atraída para a melhor posição que ela própria já encontrou (pbest), se c1 = 0, essa influência desaparece da equação:
 
 V[i] = (w * V[i]) + (c2 * r2 * (gbest_X - X[i]))
 
-Assim, as partículas deixam de considerar suas próprias melhores experiências e passam a se movimentar principalmente com base na inércia e na melhor posição encontrada pelo enxame (gbest).
-
-Isso pode fazer com que as partículas se concentrem mais rapidamente em torno do gbest, reduzindo a diversidade do enxame. Como consequência, pode ocorrer convergência prematura caso o gbest esteja próximo de um mínimo local em problemas mais complexos.
+Assim, as partículas deixam de considerar suas próprias melhores experiências e passam a se movimentar principalmente com base na inércia e na melhor posição encontrada pelo enxame (gbest),isso pode fazer com que as partículas se concentrem mais rapidamente em torno do gbest, reduzindo a diversidade do enxame. Como consequência, pode ocorrer convergência prematura caso o gbest esteja próximo de um mínimo local em problemas mais complexos.
 
 2 - Qual a função do parâmetro de Inércia (w) na busca por mínimos globais?
 
-O parâmetro de inércia w controla quanto da velocidade anterior da partícula será mantida na próxima iteração.
-
-Na equação:
-
-V[i] = (
-    (w * V[i])
-    + (c1 * r1 * (pbest_X[i] - X[i]))
-    + (c2 * r2 * (gbest_X - X[i]))
-)
-
-O termo:
-
-w * V[i]
-
-determina a influência do movimento anterior.
-
-Um valor maior de w faz as partículas manterem mais velocidade e explorarem regiões mais distantes do espaço de busca, aumentando a Exploration.
-
-Um valor menor de w reduz o movimento das partículas, favorecendo uma busca mais detalhada próxima das melhores soluções já encontradas, aumentando a Exploitation.
-
-Portanto, a inércia é importante para equilibrar exploração e refinamento. Um bom equilíbrio ajuda o PSO a explorar o espaço de busca sem abandonar rapidamente regiões promissoras.
+O parâmetro de inércia w controla quanto da velocidade anterior da partícula será mantida na próxima iteração, um valor maior de w faz as partículas manterem mais velocidade e explorarem regiões mais distantes do espaço de busca, aumentando a Exploration, um valor menor de w reduz o movimento das partículas, favorecendo uma busca mais detalhada próxima das melhores soluções já encontradas, aumentando a Exploitation, portanto, a inércia é importante para equilibrar exploração e refinamento. Um bom equilíbrio ajuda o PSO a explorar o espaço de busca sem abandonar rapidamente regiões promissoras.
 
 
 LAB 04: 
@@ -133,23 +109,11 @@ LAB 04:
 Questões Técnicas — LAB 04
 1 - Por que a evaporação do feromônio é necessária no algoritmo ACO?
 
-A evaporação é necessária para evitar que os caminhos utilizados anteriormente mantenham uma influência muito grande durante toda a execução.
-
-Ela ocorre pela fórmula:
-
-feromônio = (1 - rho) × feromônio
-
-No LAB, como rho = 0.25, a cada atualização permanece 75% do feromônio anterior.
-
-Isso permite que o algoritmo gradualmente reduza a importância de caminhos antigos e continue explorando outras alternativas. Portanto, a evaporação ajuda a manter o equilíbrio entre Exploration, procurando novas rotas, e Exploitation, utilizando as melhores rotas já encontradas.
+A evaporação é necessária para evitar que os caminhos utilizados anteriormente mantenham uma influência muito grande durante toda a execução, no LAB, como rho = 0.25, a cada atualização permanece 75% do feromônio anterior, isso permite que o algoritmo gradualmente reduza a importância de caminhos antigos e continue explorando outras alternativas. Portanto, a evaporação ajuda a manter o equilíbrio entre Exploration, procurando novas rotas, e Exploitation, utilizando as melhores rotas já encontradas.
 
 2 - O que ocorreria em grafos complexos sem ela?Qual a relação matemática entre a latência de um enlace e sua atratividade inicial (eta) para as formigas?
 
-Sem evaporação (rho = 0), o feromônio depositado nunca seria reduzido e continuaria se acumulando.
-
-Em grafos complexos, alguns caminhos poderiam receber muito feromônio nas primeiras iterações simplesmente por terem sido escolhidos inicialmente. As formigas passariam a escolher esses caminhos com frequência cada vez maior, reduzindo a exploração de outras rotas.
-
-Isso pode provocar convergência prematura ou estagnação, fazendo com que o algoritmo permaneça em uma solução subótima e tenha dificuldade para descobrir caminhos melhores.
+Sem evaporação (rho = 0), o feromônio depositado nunca seria reduzido e continuaria se acumulando, alguns caminhos poderiam receber muito feromônio nas primeiras iterações simplesmente por terem sido escolhidos inicialmente. As formigas passariam a escolher esses caminhos com frequência cada vez maior, reduzindo a exploração de outras rotas, isso pode provocar convergência prematura ou estagnação, fazendo com que o algoritmo permaneça em uma solução subótima e tenha dificuldade para descobrir caminhos melhores.
 
 
 LAB 05:
@@ -162,26 +126,10 @@ LAB 05:
 Questões Técnicas — LAB 05
 1 - Qual a diferença fundamental de conceito entre um Algoritmo Genético Puro e um Algoritmo Memético?
 
-Um Algoritmo Genético (AG) Puro realiza a otimização principalmente através de mecanismos inspirados na evolução natural, como seleção, crossover e mutação. A população evolui ao longo das gerações buscando soluções cada vez melhores.
-
-Já um Algoritmo Memético combina o Algoritmo Genético com uma técnica de busca local, como o Hill Climbing utilizado no LAB 05.
-
-A principal diferença é que, no Algoritmo Memético, os indivíduos podem ser refinados individualmente após serem gerados. Assim, temos:
-
-AG Puro:
-
-População → Seleção → Crossover → Mutação → Nova população
-
-Algoritmo Memético:
-
-População → Seleção → Crossover → Mutação → Busca Local → Nova população
-
-Dessa forma, o Algoritmo Genético contribui principalmente para a exploração global do espaço de soluções, enquanto a busca local aumenta a intensificação (exploitation) nas regiões promissoras.
-
-O Algoritmo Memético pode, portanto, encontrar soluções de alta qualidade mais rapidamente em alguns problemas, embora isso tenha um custo computacional adicional.
+Um Algoritmo Genético (AG) Puro realiza a otimização principalmente através de mecanismos inspirados na evolução natural, como seleção, crossover e mutação. A população evolui ao longo das gerações buscando soluções cada vez melhores, já um Algoritmo Memético combina o Algoritmo Genético com uma técnica de busca local, como o Hill Climbing utilizado no LAB 05, o Algoritmo Memético pode, portanto, encontrar soluções de alta qualidade mais rapidamente em alguns problemas, embora isso tenha um custo computacional adicional.
 
 2 - Em termos de custo computacional, qual o impacto de executar a busca local sobre todos os indivíduos de uma população a cada geração?
 
-Aplicar busca local em todos os indivíduos a cada geração aumenta consideravelmente o número de avaliações da função objetivo e, consequentemente, o tempo e o custo computacional. Apesar disso, pode melhorar a qualidade das soluções e acelerar a convergência. Para reduzir esse custo, a busca local pode ser aplicada apenas aos melhores indivíduos ou em algumas gerações.
+Aplicar busca local em todos os indivíduos a cada geração aumenta consideravelmente o número de avaliações da função objetivo e, consequentemente, o tempo e o custo computacional, apesar disso, pode melhorar a qualidade das soluções e acelerar a convergência, para reduzir esse custo, a busca local pode ser aplicada apenas aos melhores indivíduos ou em algumas gerações.
 
 
