@@ -154,8 +154,34 @@ Isso pode provocar convergência prematura ou estagnação, fazendo com que o al
 
 LAB 05:
 
+[LAB 05] Solução Inicial: [ 2.5 -3.1] | Fitness: 37.7698
+[LAB 05] Solução Refinada: [ 2.47553974 -3.04650038] | Fitness: 35.7154
+[LAB 05] Melhoria obtida: 2.0544
 
 
+Questões Técnicas — LAB 05
+1 - Qual a diferença fundamental de conceito entre um Algoritmo Genético Puro e um Algoritmo Memético?
 
+Um Algoritmo Genético (AG) Puro realiza a otimização principalmente através de mecanismos inspirados na evolução natural, como seleção, crossover e mutação. A população evolui ao longo das gerações buscando soluções cada vez melhores.
+
+Já um Algoritmo Memético combina o Algoritmo Genético com uma técnica de busca local, como o Hill Climbing utilizado no LAB 05.
+
+A principal diferença é que, no Algoritmo Memético, os indivíduos podem ser refinados individualmente após serem gerados. Assim, temos:
+
+AG Puro:
+
+População → Seleção → Crossover → Mutação → Nova população
+
+Algoritmo Memético:
+
+População → Seleção → Crossover → Mutação → Busca Local → Nova população
+
+Dessa forma, o Algoritmo Genético contribui principalmente para a exploração global do espaço de soluções, enquanto a busca local aumenta a intensificação (exploitation) nas regiões promissoras.
+
+O Algoritmo Memético pode, portanto, encontrar soluções de alta qualidade mais rapidamente em alguns problemas, embora isso tenha um custo computacional adicional.
+
+2 - Em termos de custo computacional, qual o impacto de executar a busca local sobre todos os indivíduos de uma população a cada geração?
+
+Aplicar busca local em todos os indivíduos a cada geração aumenta consideravelmente o número de avaliações da função objetivo e, consequentemente, o tempo e o custo computacional. Apesar disso, pode melhorar a qualidade das soluções e acelerar a convergência. Para reduzir esse custo, a busca local pode ser aplicada apenas aos melhores indivíduos ou em algumas gerações.
 
 
