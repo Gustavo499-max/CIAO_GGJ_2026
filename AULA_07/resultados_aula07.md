@@ -58,6 +58,70 @@ Sem essa penalização, uma solução poderia possuir um valor muito alto e ser 
 Portanto, a penalização direciona a evolução para regiões do espaço de busca que respeitam as restrições do problema, permitindo que o algoritmo procure soluções que sejam ao mesmo tempo válidas e de alto valor.
 
 
+LAB 03:
+
+Iteração 1: Melhor Fitness = 0.233705
+Iteração 2: Melhor Fitness = 0.230322
+Iteração 3: Melhor Fitness = 0.017423
+Iteração 4: Melhor Fitness = 0.017423
+Iteração 5: Melhor Fitness = 0.005174
+Iteração 6: Melhor Fitness = 0.005174
+Iteração 7: Melhor Fitness = 0.000399
+Iteração 8: Melhor Fitness = 0.000399
+Iteração 9: Melhor Fitness = 0.000399
+Iteração 10: Melhor Fitness = 0.000399
+Iteração 11: Melhor Fitness = 0.000399
+Iteração 12: Melhor Fitness = 0.000399
+Iteração 13: Melhor Fitness = 0.000399
+Iteração 14: Melhor Fitness = 0.000280
+Iteração 15: Melhor Fitness = 0.000226
+
+========================================
+          RESULTADO FINAL - PSO
+========================================
+[LAB 03] Melhor posição encontrada pelo Enxame (gbest): [ 0.00742668 -0.0130891 ]
+Melhor Fitness: 0.000226
+Coordenada X: 0.007427
+Coordenada Y: -0.013089
+
+Questões Técnicas — LAB 03
+1 - O que acontece com o comportamento das partículas se zerarmos a componente cognitiva (c_1 = 0)?
+
+A componente cognitiva representa a memória individual da partícula, fazendo com que ela seja atraída para a melhor posição que ela própria já encontrou (pbest).
+
+Se c1 = 0, essa influência desaparece da equação:
+
+V[i] = (w * V[i]) + (c2 * r2 * (gbest_X - X[i]))
+
+Assim, as partículas deixam de considerar suas próprias melhores experiências e passam a se movimentar principalmente com base na inércia e na melhor posição encontrada pelo enxame (gbest).
+
+Isso pode fazer com que as partículas se concentrem mais rapidamente em torno do gbest, reduzindo a diversidade do enxame. Como consequência, pode ocorrer convergência prematura caso o gbest esteja próximo de um mínimo local em problemas mais complexos.
+
+2 - Qual a função do parâmetro de Inércia (w) na busca por mínimos globais?
+
+O parâmetro de inércia w controla quanto da velocidade anterior da partícula será mantida na próxima iteração.
+
+Na equação:
+
+V[i] = (
+    (w * V[i])
+    + (c1 * r1 * (pbest_X[i] - X[i]))
+    + (c2 * r2 * (gbest_X - X[i]))
+)
+
+O termo:
+
+w * V[i]
+
+determina a influência do movimento anterior.
+
+Um valor maior de w faz as partículas manterem mais velocidade e explorarem regiões mais distantes do espaço de busca, aumentando a Exploration.
+
+Um valor menor de w reduz o movimento das partículas, favorecendo uma busca mais detalhada próxima das melhores soluções já encontradas, aumentando a Exploitation.
+
+Portanto, a inércia é importante para equilibrar exploração e refinamento. Um bom equilíbrio ajuda o PSO a explorar o espaço de busca sem abandonar rapidamente regiões promissoras.
+
+
 
 
 
