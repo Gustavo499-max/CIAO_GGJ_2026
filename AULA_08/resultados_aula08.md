@@ -52,3 +52,37 @@ Maior diversidade genética final média: A
 Melhor valor viável: empate entre A e B: 212.0
 Atenção: desvio-padrão de fitness não é, sozinho, medida de diversidade genética.
 
+
+Lab03-
+
+MATRIZ DE LATÊNCIAS FÍSICAS D (0 = sem ligação):
+ [[ 0.  4.  8.  0.  0.  0.  0.  0.  0. 12.]
+ [ 4.  0.  3.  7.  0.  0.  0.  0.  0.  0.]
+ [ 8.  3.  0.  2.  6.  0.  0.  0.  0.  0.]
+ [ 0.  7.  2.  0.  5.  9.  0.  0.  0.  0.]
+ [ 0.  0.  6.  5.  0.  4.  8.  0.  0.  0.]
+ [ 0.  0.  0.  9.  4.  0.  3.  7.  0.  0.]
+ [ 0.  0.  0.  0.  8.  3.  0.  2.  6.  0.]
+ [ 0.  0.  0.  0.  0.  7.  2.  0.  5.  8.]
+ [ 0.  0.  0.  0.  0.  0.  6.  5.  0.  3.]
+ [12.  0.  0.  0.  0.  0.  0.  8.  3.  0.]]
+
+ARESTAS DA TOPOLOGIA ACO (switches numerados 0 a 9): [(1, 2), (8, 9), (4, 5), (2, 3), (5, 6), (6, 7), (0, 1), (7, 8), (3, 4)]
+
+MATRIZ DE ADJACÊNCIA FINAL (10 x 10):
+ [[0 1 0 0 0 0 0 0 0 0]
+ [1 0 1 0 0 0 0 0 0 0]
+ [0 1 0 1 0 0 0 0 0 0]
+ [0 0 1 0 1 0 0 0 0 0]
+ [0 0 0 1 0 1 0 0 0 0]
+ [0 0 0 0 1 0 1 0 0 0]
+ [0 0 0 0 0 1 0 1 0 0]
+ [0 0 0 0 0 0 1 0 1 0]
+ [0 0 0 0 0 0 0 1 0 1]
+ [0 0 0 0 0 0 0 0 1 0]]
+
+Latência total da topologia aleatória: 59.00 ms
+Latência total da topologia ACO: 31.00 ms
+Ganho percentual: 47.46%
+Árvore válida: True | 9 arestas: True
+
