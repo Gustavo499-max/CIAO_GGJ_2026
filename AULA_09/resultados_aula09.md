@@ -88,3 +88,12 @@ Digite a umidade do solo (0 a 100%): 58
 Temperatura: 35.0 °C
 Umidade do solo: 58.0%
 Tempo recomendado de irrigação: 13.4 minutos
+
+
+Para representar situações que não possuem limites exatos, foram utilizados conjuntos fuzzy. A temperatura foi classificada como fria, agradável ou quente, enquanto a umidade do solo foi classificada como seca, média ou úmida. O tempo de irrigação pode ser curto, médio ou longo.
+
+Foram criadas 9 regras fuzzy, combinando temperatura e umidade por meio dos operadores E (AND) e OU (OR). Por exemplo, quando o solo está seco e a temperatura está quente, o sistema recomenda uma irrigação mais longa. Quando o solo está úmido, a tendência é recomendar uma irrigação curta.
+
+A principal vantagem da lógica fuzzy é permitir decisões graduais. Uma temperatura não precisa ser exclusivamente agradável ou quente, pois pode possuir diferentes graus de pertinência nos dois conjuntos. O mesmo ocorre com a umidade do solo.
+
+Após analisar as entradas e aplicar as regras, o sistema realiza a defuzzificação, convertendo o resultado fuzzy em um valor numérico que representa quantos minutos a irrigação deve permanecer ativa.
