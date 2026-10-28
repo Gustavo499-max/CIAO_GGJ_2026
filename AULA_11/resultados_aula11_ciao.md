@@ -37,3 +37,47 @@ Cobertura de código:
 - Instruções não cobertas: 4
 
 A terceira execução confirmou que a correção restaurou o comportamento esperado do sistema. A cobertura total de 89% demonstra que a maior parte das instruções do motor de inferência foi exercitada pelos testes automatizados.
+
+
+## Resultado final — Sistema de Triagem UTI
+
+O sistema fuzzy de triagem médica foi desenvolvido
+com duas variáveis de entrada: frequência cardíaca
+e saturação de oxigênio.
+
+Foram implementadas cinco regras de inferência,
+utilizando funções triangulares e trapezoidais.
+
+### Validação experimental
+
+Na execução inicial, dois testes passaram e um
+falhou devido ao risco calculado para SpO2 de 95%.
+
+Foi realizado um ajuste experimental na função
+de pertinência limítrofe, alterando os parâmetros
+de [89, 93, 96] para [89, 93, 95].
+
+Após o ajuste, foram obtidos:
+
+- Paciente saudável: PASSED
+- Salto não linear de SpO2: PASSED
+- Validação de limites fisiológicos: PASSED
+
+### Cobertura de código
+
+- Arquivo: src/uti_triagem.py
+- Instruções analisadas: 34
+- Instruções não cobertas: 4
+- Cobertura total: 88%
+- Tempo de execução: 1,87 segundos
+- Resultado: 3 testes aprovados, nenhuma falha
+
+### Conclusão
+
+A validação experimental confirmou que o sistema
+atendeu aos três critérios de teste após o ajuste
+documentado na função de pertinência.
+
+O projeto demonstrou a aplicação da lógica fuzzy,
+dos testes automatizados e da análise de cobertura
+na verificação de um motor de inferência.
