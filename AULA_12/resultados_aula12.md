@@ -34,6 +34,21 @@ Exercício4:
 <img width="609" height="393" alt="image" src="https://github.com/user-attachments/assets/e23c7781-5e36-4a6c-8357-ba13b0fcb0a8" />
 
 
+
+
 O objetivo foi aplicar o algoritmo NSGA-II para analisar diferentes combinações entre renda fixa e ações, buscando maximizar o retorno esperado e minimizar o risco financeiro.
 Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo. Como o algoritmo trabalha com minimização, o sinal do retorno foi invertido.
 A execução gerou resultados numéricos e um gráfico de Risco versus Retorno, permitindo visualizar diferentes alternativas de investimento.
+
+
+
+Exercicio5:
+
+
+<img width="618" height="394" alt="image" src="https://github.com/user-attachments/assets/cd9f893c-fa56-4bb6-b69e-a7ba48ade768" />
+
+
+
+O objetivo foi otimizar os parâmetros de um modelo de Machine Learning, buscando minimizar o erro de predição e o tempo de inferência.
+Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 30 indivíduos e 40 gerações.
+A execução gerou resultados numéricos e um gráfico da Fronteira de Pareto, demonstrando o equilíbrio entre precisão e velocidade de processamento.
