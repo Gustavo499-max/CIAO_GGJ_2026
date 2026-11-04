@@ -27,3 +27,13 @@ Exercício 3:
 O objetivo foi aplicar a otimização multiobjetivo na logística de drones, considerando a minimização do tempo de entrega, custo operacional e emissão de CO₂.
 Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 40 indivíduos e 50 gerações.
 A execução gerou resultados numéricos e um gráfico tridimensional da Fronteira de Pareto, permitindo analisar o equilíbrio entre eficiência, custos e impacto ambiental.
+
+
+Exercício4: 
+
+<img width="609" height="393" alt="image" src="https://github.com/user-attachments/assets/e23c7781-5e36-4a6c-8357-ba13b0fcb0a8" />
+
+
+O objetivo foi aplicar o algoritmo NSGA-II para analisar diferentes combinações entre renda fixa e ações, buscando maximizar o retorno esperado e minimizar o risco financeiro.
+Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo. Como o algoritmo trabalha com minimização, o sinal do retorno foi invertido.
+A execução gerou resultados numéricos e um gráfico de Risco versus Retorno, permitindo visualizar diferentes alternativas de investimento.
