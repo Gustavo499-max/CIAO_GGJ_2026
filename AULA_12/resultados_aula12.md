@@ -17,3 +17,13 @@ Exercício 2:
 O objetivo foi otimizar a quantidade de analistas e regimentos de segurança, minimizando o custo operacional e o tempo de resposta dos incidentes.
 Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 30 indivíduos e 40 gerações.
 A execução gerou resultados numéricos e um gráfico da Fronteira de Pareto, demonstrando o equilíbrio entre os recursos financeiros investidos e a eficiência da equipe de segurança.
+
+
+
+Exercício 3: 
+
+<img width="500" height="507" alt="image" src="https://github.com/user-attachments/assets/c3dcfe85-f880-4b2c-b3b1-89bb7aa36bc2" />
+
+O objetivo foi aplicar a otimização multiobjetivo na logística de drones, considerando a minimização do tempo de entrega, custo operacional e emissão de CO₂.
+Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 40 indivíduos e 50 gerações.
+A execução gerou resultados numéricos e um gráfico tridimensional da Fronteira de Pareto, permitindo analisar o equilíbrio entre eficiência, custos e impacto ambiental.
