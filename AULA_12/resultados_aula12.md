@@ -74,3 +74,8 @@ Foi implementada a classe FrotaRobosProblem em Python, utilizando a biblioteca p
 A execução apresentou três soluções de trade-off: menor custo, menor tempo e uma solução intermediária. Também foi gerado o gráfico da Fronteira de Pareto para visualizar os resultados.
 
 
+
+A realização dos sete exercícios permitiu compreender e aplicar os conceitos de otimização multiobjetivo utilizando Python e o algoritmo NSGA-II. Durante as atividades, foram desenvolvidos modelos envolvendo infraestrutura Cloud, segurança da informação, logística, investimentos, Machine Learning, baterias elétricas e robôs autônomos.
+Os resultados demonstraram a importância da Fronteira de Pareto na análise de objetivos conflitantes, permitindo identificar diferentes soluções e avaliar os melhores equilíbrios entre custo, desempenho, eficiência e segurança.
+Também foi possível compreender a aplicação de restrições nos problemas de otimização, garantindo que as soluções respeitassem os limites estabelecidos em cada cenário.
+
