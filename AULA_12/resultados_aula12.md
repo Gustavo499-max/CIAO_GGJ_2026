@@ -52,3 +52,14 @@ Exercicio5:
 O objetivo foi otimizar os parâmetros de um modelo de Machine Learning, buscando minimizar o erro de predição e o tempo de inferência.
 Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 30 indivíduos e 40 gerações.
 A execução gerou resultados numéricos e um gráfico da Fronteira de Pareto, demonstrando o equilíbrio entre precisão e velocidade de processamento.
+
+
+Exercício 6:
+
+
+<img width="626" height="394" alt="image" src="https://github.com/user-attachments/assets/4dfb0eed-d3bd-41f3-94c9-1b49dc34aff2" />|
+
+O objetivo foi otimizar o tempo de recarga e o desgaste de baterias de veículos elétricos, respeitando o limite máximo de desgaste de 1.500 unidades.
+Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 50 indivíduos e 80 gerações.
+A execução apresentou soluções viáveis e um gráfico, demonstrando como as restrições de segurança podem ser aplicadas em problemas de otimização multiobjetivo.
+
