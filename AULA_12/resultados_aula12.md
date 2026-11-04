@@ -63,3 +63,14 @@ O objetivo foi otimizar o tempo de recarga e o desgaste de baterias de veículos
 Foi desenvolvido um modelo em Python utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 50 indivíduos e 80 gerações.
 A execução apresentou soluções viáveis e um gráfico, demonstrando como as restrições de segurança podem ser aplicadas em problemas de otimização multiobjetivo.
 
+
+Exercício 7 :
+
+
+<img width="889" height="490" alt="image" src="https://github.com/user-attachments/assets/32a440b3-ee8f-4aed-94f6-2900011034db" />
+
+O objetivo foi desenvolver um modelo de otimização multiobjetivo para dimensionar uma frota de robôs logísticos, minimizando custos e tempo médio de entrega, respeitando o limite de consumo energético de 120 unidades.
+Foi implementada a classe FrotaRobosProblem em Python, utilizando a biblioteca pymoo e o algoritmo NSGA-II, com população de 40 indivíduos e 60 gerações.
+A execução apresentou três soluções de trade-off: menor custo, menor tempo e uma solução intermediária. Também foi gerado o gráfico da Fronteira de Pareto para visualizar os resultados.
+
+
