@@ -110,7 +110,8 @@ Configuração:
 
 ### Gráfico da Fronteira de Pareto
 
-![Exercicio 1](graficos/exercicio01_pareto.png)
+<img width="704" height="470" alt="image" src="https://github.com/user-attachments/assets/180ca718-cef5-400f-be77-3f093b406f69" />
+
 
 **Análise:** o gráfico apresenta as soluções encontradas considerando
 o compromisso entre latência e custo. A utilização de variáveis
@@ -171,7 +172,8 @@ e semente 42.
 
 ### Gráfico comparativo
 
-![Exercicio 3](graficos/exercicio03_exploracao.png)
+<img width="790" height="490" alt="image" src="https://github.com/user-attachments/assets/71d17d5e-9e8f-440f-a485-c2412fc8191b" />
+
 
 **Análise:** a configuração A favorece variações maiores e maior
 exploração do espaço de busca. A configuração B favorece variações
@@ -237,7 +239,7 @@ Configuração:
 
 ### Gráfico da seleção MCDM
 
-![Exercicio 5](graficos/exercicio05_mcdm.png)
+<img width="790" height="490" alt="image" src="https://github.com/user-attachments/assets/263f367b-f1e1-4e41-a790-54d4f825f622" />
 
 **Análise:** a solução selecionada pelo PseudoWeights considera
 a preferência de negócio definida, atribuindo maior importância
@@ -285,7 +287,7 @@ menor ou igual a 25 minutos.
 
 ### Gráfico da escala hospitalar
 
-![Exercicio 6](graficos/exercicio06_hospital.png)
+
 
 **Análise:** o MCDM selecionou uma escala considerando os pesos
 estabelecidos para custo e tempo de espera, respeitando a
